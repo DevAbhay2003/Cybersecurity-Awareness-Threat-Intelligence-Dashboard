@@ -471,3 +471,4 @@ git commit -m "Complete comprehensive README documentation and deployment guide"
 - **Author:** Cybersecurity Student & Defensive Engineering Practitioner
 - **Project Purpose:** Academic Course Capstone & Industry Proof-of-Work Portfolio
 - **Standards Referenced:** NIST SP 800-61 (Incident Handling), NIST SP 800-50 (Security Awareness), NIST SP 800-63B (Authentication & Passwords), MITRE ATT&CK Enterprise Matrix v15, RFC 5737 / RFC 3849 (Documentation IPs), RFC 2606 (Reserved Domains).
+- Abhishek Basu — Embedded Systems Student GitHub: [DevAbhay2003](https://github.com/DevAbhay2003?tab=repositories) · LinkedIn: [Abhishek Basu](https://www.linkedin.com/in/abhishek-basu-68b1b1342/)
