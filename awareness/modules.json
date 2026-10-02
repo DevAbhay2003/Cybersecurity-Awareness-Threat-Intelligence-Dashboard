@@ -1,0 +1,311 @@
+[
+  {
+    "id": "MOD-001",
+    "title": "Phishing Awareness & Email Defense",
+    "category": "PHISHING",
+    "description": "Learn to detect deceptive emails, fake notifications, urgent credential requests, and counterfeit login forms.",
+    "what_is_it": "Phishing is a social engineering technique where threat actors impersonate legitimate organizations (banks, cloud providers, IT helpdesks) to trick individuals into divulging credentials, financial data, or installing malicious payloads.",
+    "why_it_matters": "Over 80% of security incidents begin with phishing. A single compromised employee account can provide adversaries with Initial Access into enterprise networks, leading to data exfiltration or ransomware deployment.",
+    "warning_signs": [
+      "Artificial urgency (e.g., 'Account suspended within 24 hours!')",
+      "Mismatched sender domain (display name says 'IT Support' but address is support@external-mail-service.invalid)",
+      "Unsolicited password reset or security verification links",
+      "Vague greetings ('Dear Customer' or 'Valued Colleague')",
+      "Unexpected invoices, shipping notifications, or payroll update attachments",
+      "Suspicious QR codes (Quishing) designed to evade email gateway link scanners"
+    ],
+    "safe_practices": [
+      "Inspect the full sender address and header domains carefully before acting",
+      "Do not click links directly; navigate independently to official bookmarks or portals",
+      "Verify unexpected urgent requests via an out-of-band communication channel (e.g., direct call or known internal chat)",
+      "Use phishing-resistant Multi-Factor Authentication (FIDO2 / WebAuthn / Passkeys)",
+      "Never enter corporate credentials on non-company domains"
+    ],
+    "what_to_do": "Report the suspicious message immediately using your email client's Phishing Alert button or notify the SOC / Security Helpdesk. If credentials were submitted, immediately reset your password and request session termination from IT."
+  },
+  {
+    "id": "MOD-002",
+    "title": "Password Security & Passphrase Hygiene",
+    "category": "CREDENTIAL THREATS",
+    "description": "Construct strong, unique passphrases and leverage enterprise password managers to eradicate password reuse vulnerabilities.",
+    "what_is_it": "Password security encompasses the creation, storage, and lifecycle management of secret authentication tokens used to verify user identity against enterprise directories and web applications.",
+    "why_it_matters": "Adversaries utilize automated Credential Stuffing and Brute Force attacks against exposed endpoints using breached credential lists. Reusing a single password across personal and work services multiplies exposure risk exponentially.",
+    "warning_signs": [
+      "Notifications that an account was logged into from an unrecognized location or IP",
+      "Password change confirmation emails you did not request",
+      "Browser alerts warning that stored credentials appeared in a public data breach",
+      "Prompts to reuse familiar passwords across multiple separate services"
+    ],
+    "safe_practices": [
+      "Use a dedicated Password Manager to generate and store 16+ character unique passphrases",
+      "Implement passphrases combining 4+ random words (e.g., 'cactus-orbit-blanket-whistle')",
+      "Never write passwords down on sticky notes or store them in plaintext files",
+      "Eliminate password reuse completely across all applications",
+      "Combine every password with hardware-backed Multi-Factor Authentication"
+    ],
+    "what_to_do": "If you suspect password compromise, immediately change the credential on the impacted service, revoke active sessions, and check whether identical passwords were used on other platforms."
+  },
+  {
+    "id": "MOD-003",
+    "title": "Multi-Factor Authentication (MFA) & FIDO2",
+    "category": "ACCOUNT SECURITY",
+    "description": "Understand authentication factors, MFA fatigue attacks, and the superiority of phishing-resistant authentication methods.",
+    "what_is_it": "Multi-Factor Authentication requires two or more independent credentials across different categories: Something you know (password), Something you have (hardware key, authenticator app), and Something you are (biometric fingerprint/face).",
+    "why_it_matters": "MFA stops up to 99% of bulk credential stuffing attacks. However, legacy MFA methods (SMS and basic push notifications) can be intercepted via SIM swapping or defeated through MFA Prompt Bombing (fatigue).",
+    "warning_signs": [
+      "Receiving unsolicited MFA push notifications or SMS verification codes when you are not actively logging in",
+      "Repeated consecutive push prompts within minutes (MFA fatigue attack)",
+      "Unfamiliar individuals claiming to be IT asking for your MFA code or one-time token"
+    ],
+    "safe_practices": [
+      "Adopt phishing-resistant FIDO2 / WebAuthn security keys or Passkeys where available",
+      "Use Authenticator Apps with Number Matching enabled rather than plain SMS codes",
+      "Never approve an authentication prompt you did not personally trigger",
+      "Report repeated unsolicited prompts to the SOC as an active credential compromise indicator"
+    ],
+    "what_to_do": "Reject unexpected MFA prompts immediately. Select 'Deny' or 'Report Suspicious Activity' in your authenticator app, and inform your security team immediately."
+  },
+  {
+    "id": "MOD-004",
+    "title": "Social Engineering & Pretexting Defense",
+    "category": "SOCIAL ENGINEERING",
+    "description": "Recognize psychological manipulation techniques including vishing, impersonation, pretexting, and physical tailgating.",
+    "what_is_it": "Social engineering is the psychological manipulation of human cognitive biases (authority, urgency, fear, helpfulness, FOMO) to convince people to bypass security protocols, disclose confidential information, or authorize fraudulent transfers.",
+    "why_it_matters": "Adversaries target human psychology because humans are often easier to exploit than hardened cryptographic algorithms or firewalls. Business Email Compromise (BEC) and vendor fraud cost billions annually.",
+    "warning_signs": [
+      "Callers claiming to be executives or IT contractors demanding urgent wire transfers or secret gift card purchases",
+      "Requests to bypass standard purchase order or vendor verification workflows",
+      "Flattery, intimidation, or high pressure asserting grave consequences if you do not comply immediately",
+      "Unknown visitors following closely behind you through secure badge-access doors (Tailgating)"
+    ],
+    "safe_practices": [
+      "Always follow dual-authorization protocols for wire transfers and banking detail changes",
+      "Verify caller identities by hanging up and calling verified internal directory numbers",
+      "Never badge unauthorized individuals into restricted enterprise facilities",
+      "Maintain a healthy culture of verification without fear of offending authority figures"
+    ],
+    "what_to_do": "Politely pause the conversation, decline to provide sensitive details or authorize transactions, and report the interaction to corporate security and your direct supervisor."
+  },
+  {
+    "id": "MOD-005",
+    "title": "Safe Web Browsing & Drive-By Defense",
+    "category": "WEB THREATS",
+    "description": "Navigate the web defensively, spot counterfeit domains, understand TLS certificates, and prevent drive-by download risks.",
+    "what_is_it": "Safe browsing involves defensive operational behaviors and browser configurations designed to prevent web-based malware delivery, malicious redirects, cross-site scripting, and credential harvesting.",
+    "why_it_matters": "Adversaries purchase lookalike typosquatting domains (e.g., exampel.com), compromise legitimate web servers with malvertising, or deploy fake software download portals to deliver trojans to endpoint devices.",
+    "warning_signs": [
+      "URL typosquatting or strange Top-Level Domains (TLDs) for known corporate brands",
+      "Browser popups claiming your computer has 5 viruses and displaying fake hotline numbers",
+      "Automatic file downloads initiated immediately upon page landing without user consent",
+      "Missing or invalid SSL/TLS certificate warnings in browser address bar"
+    ],
+    "safe_practices": [
+      "Verify the exact spelling of domains in the address bar before entering credentials",
+      "Keep browsers and extensions updated automatically with the latest security patches",
+      "Disable third-party tracking cookies and avoid installing untrusted browser add-ons",
+      "Never download executable files (.exe, .scr, .iso, .vbs, .msi) from unverified third-party websites"
+    ],
+    "what_to_do": "Close the suspicious browser tab immediately. If a download was initiated, do NOT run or open the file. Submit the URL to your SOC's safe quarantine or threat intelligence review queue."
+  },
+  {
+    "id": "MOD-006",
+    "title": "Secure Wi-Fi & Network Defense",
+    "category": "NETWORK THREATS",
+    "description": "Protect telemetry, communication channels, and corporate data across untrusted public Wi-Fi, hotels, and airports.",
+    "what_is_it": "Network defense awareness addresses the risks of transmitting sensitive corporate and personal communications across open, unencrypted, or rogue wireless access points.",
+    "why_it_matters": "Adversaries can configure rogue access points (Evil Twins) in coffee shops or airports to perform Man-in-the-Middle (MitM) attacks, capturing unencrypted sessions, injecting ads, or spoofing DNS queries.",
+    "warning_signs": [
+      "Multiple access points with identical or near-identical names in the same location",
+      "Public Wi-Fi networks requiring you to install a custom root certificate profile to connect",
+      "Browser certificate warnings appearing repeatedly when connected to public wireless networks"
+    ],
+    "safe_practices": [
+      "Use enterprise VPN or encrypted Zero Trust Network Access (ZTNA) on untrusted Wi-Fi",
+      "Disable auto-connect for public Wi-Fi networks on all mobile and laptop devices",
+      "Ensure all connections use HTTPS/TLS encrypted protocols",
+      "Prefer cellular mobile hotspots over open public hotel or airport networks for confidential work"
+    ],
+    "what_to_do": "Disconnect from the suspect wireless network immediately, verify your firewall is active, reconnect via your corporate VPN or cellular tether, and report rogue networks if within corporate premises."
+  },
+  {
+    "id": "MOD-007",
+    "title": "Software Updates & Patch Management",
+    "category": "VULNERABILITY EXPOSURE",
+    "description": "Understand why timely patching neutralizes known CVEs and halts automated exploit kits from weaponizing exposures.",
+    "what_is_it": "Software vulnerability management and patching is the process of identifying, testing, and applying vendor-issued updates and bug fixes to operating systems, firmware, runtimes, and third-party software applications.",
+    "why_it_matters": "The vast majority of cyberattacks exploit known vulnerabilities for which security patches were already available for weeks or months. Adversaries reverse-engineer security updates to weaponize exploits against unpatched systems.",
+    "warning_signs": [
+      "Operating system or software prompts indicating an update has been deferred repeatedly",
+      "Software applications running deprecated, end-of-life (EOL), or unsupported versions",
+      "Alerts from vulnerability scanners highlighting critical Common Vulnerabilities and Exposures (CVEs)"
+    ],
+    "safe_practices": [
+      "Enable automatic security updates for operating systems and web browsers",
+      "Restart endpoint devices promptly when prompted by enterprise patch management agents",
+      "Decommission or isolate legacy applications that no longer receive vendor security updates",
+      "Maintain a comprehensive asset software inventory to track version exposures"
+    ],
+    "what_to_do": "Apply vendor security updates as soon as scheduled by IT. If using personal devices for work (BYOD), verify OS and application versions meet minimum security baseline requirements."
+  },
+  {
+    "id": "MOD-008",
+    "title": "Ransomware Awareness & Incident Defense",
+    "category": "RANSOMWARE",
+    "description": "Understand ransomware tactics, double extortion mechanisms, and the critical importance of immutable offline backups.",
+    "what_is_it": "Ransomware is malicious software designed to deny access to computer systems, databases, or files by encrypting data and demanding payment for decryption keys, frequently coupled with data exfiltration extortion.",
+    "why_it_matters": "Ransomware can paralyze hospitals, supply chains, municipal services, and corporations, causing millions in recovery costs, regulatory fines, and reputational destruction.",
+    "warning_signs": [
+      "Sudden mass file extension changes or strange file icons appearing across directories",
+      "Desktop background replaced with a ransom note or .txt/.html payment demands in folders",
+      "Unusual spikes in CPU/disk activity combined with outbound high-volume network transfers",
+      "Security endpoint agent (EDR) being disabled or alerting on mass file modification events"
+    ],
+    "safe_practices": [
+      "Maintain immutable, tested, air-gapped or offline backups following the 3-2-1 backup rule",
+      "Enforce Least Privilege access controls so compromised accounts cannot access all network shares",
+      "Keep network segmentation in place between user workstations, critical databases, and production servers",
+      "Train employees never to open macro-enabled Office files or unverified archives (.zip, .7z, .iso)"
+    ],
+    "what_to_do": "Immediately disconnect the infected device from both Wi-Fi and wired Ethernet networks to prevent lateral spread. Do NOT power off or reboot (preserve RAM artifacts for digital forensics). Alert the SOC/Incident Response team immediately."
+  },
+  {
+    "id": "MOD-009",
+    "title": "Removable Media & USB Security",
+    "category": "NETWORK THREATS",
+    "description": "Defend against baiting attacks, malicious BadUSB keystroke injectors, and unauthorized data exfiltration via thumb drives.",
+    "what_is_it": "Removable media security refers to defensive policies and controls governing physical USB drives, external hard drives, SD cards, and peripherals connected to endpoint hardware.",
+    "why_it_matters": "Adversaries intentionally drop malware-laden USB drives in parking lots or lobbies (Baiting), or use BadUSB microcontrollers programmed to emulate keyboards and execute hidden command shells within seconds of insertion.",
+    "warning_signs": [
+      "Unattended USB flash drives discovered in corporate hallways, restrooms, or parking areas",
+      "USB drives with tempting labels like 'Executive Salary Reviews' or 'Confidential Q4 Bonuses'",
+      "Keyboards or peripherals acting erratically or opening unexpected terminal/PowerShell windows"
+    ],
+    "safe_practices": [
+      "Never insert an unknown or found USB drive into any work or personal computer",
+      "Enforce endpoint USB port blocking or read-only storage policies via Group Policy / MDM",
+      "Use approved corporate cloud storage channels for authorized data transfer instead of physical thumb drives",
+      "Hand over found physical media to corporate physical security or the SOC without plugging it in"
+    ],
+    "what_to_do": "If an unknown drive was accidentally plugged in, disconnect it immediately, lock your workstation, and notify the SOC so forensics can inspect autorun logs and memory artifacts."
+  },
+  {
+    "id": "MOD-010",
+    "title": "Data Privacy & Information Protection",
+    "category": "DATA EXPOSURE",
+    "description": "Safeguard Personally Identifiable Information (PII), customer records, intellectual property, and comply with data regulations.",
+    "what_is_it": "Data privacy and protection involves the policies, encryption mechanisms, and handling procedures required to safeguard sensitive corporate records, customer PII, health information, and proprietary source code.",
+    "why_it_matters": "Data breaches incur heavy regulatory penalties under GDPR, HIPAA, and CCPA, along with class-action lawsuits, loss of customer trust, and intellectual property theft.",
+    "warning_signs": [
+      "Requests to export customer databases or employee PII to personal cloud drives or external email addresses",
+      "Unencrypted database backups stored in publicly accessible AWS S3 buckets or open web roots",
+      "Third-party vendors requesting excessive data permissions beyond contractual scope"
+    ],
+    "safe_practices": [
+      "Classify enterprise data into Public, Internal, Confidential, and Restricted tiers",
+      "Encrypt sensitive data both at rest (AES-256) and in transit (TLS 1.3)",
+      "Never upload confidential corporate data, customer records, or proprietary code into public generative AI tools",
+      "Follow clean desk policies and secure digital documents with appropriate access controls"
+    ],
+    "what_to_do": "If you discover sensitive data accidentally exposed in a public repository or shared with unauthorized recipients, report the incident immediately to your Data Protection Officer (DPO) and security team."
+  },
+  {
+    "id": "MOD-011",
+    "title": "Mobile Device Security & App Hygiene",
+    "category": "ACCOUNT SECURITY",
+    "description": "Secure smartphones and tablets against malicious applications, rogue profiles, spyware, and physical loss.",
+    "what_is_it": "Mobile security encompasses protecting corporate and personal mobile devices through encryption, biometric locks, application vetting, and Mobile Device Management (MDM) policies.",
+    "why_it_matters": "Smartphones contain enterprise email, MFA authenticators, contact databases, and Slack/Teams messages. Malicious mobile applications and spyware can record audio, read SMS MFA tokens, and exfiltrate photos.",
+    "warning_signs": [
+      "Battery draining rapidly or device overheating without intense application usage",
+      "Unexpected popups or unfamiliar applications appearing on the home screen",
+      "Prompts to install enterprise configuration profiles or root/jailbreak certificates from web links"
+    ],
+    "safe_practices": [
+      "Install applications only from verified official marketplaces (Google Play, Apple App Store)",
+      "Set a minimum 6-digit PIN or strong alphanumeric passcode alongside biometric authentication",
+      "Enable device remote wipe and Find My Device capabilities",
+      "Never jailbreak or root devices used to access corporate email or internal resources"
+    ],
+    "what_to_do": "If a mobile device containing corporate data is lost or stolen, immediately notify IT/security so they can initiate a remote enterprise wipe to protect confidential data."
+  },
+  {
+    "id": "MOD-012",
+    "title": "Remote Work & Home Network Security",
+    "category": "NETWORK THREATS",
+    "description": "Harden home routers, segregate smart home IoT devices, and maintain defensive hygiene outside the corporate perimeter.",
+    "what_is_it": "Remote work security extends defensive controls into home environments, home office routers, and hybrid workspaces where traditional corporate perimeter firewalls are absent.",
+    "why_it_matters": "Home routers with default administrator credentials or vulnerable smart home cameras provide adversaries with entry points into home local networks, risking compromise of work laptops connected to the same subnet.",
+    "warning_signs": [
+      "Home Wi-Fi router operating on factory default credentials ('admin/admin')",
+      "Family members or guests using corporate workstations for streaming, games, or homework",
+      "Router DNS settings modified to unfamiliar third-party resolving IP addresses"
+    ],
+    "safe_practices": [
+      "Change default router administrator passwords and update router firmware regularly",
+      "Configure a dedicated Guest Wi-Fi network for smart home IoT devices (TVs, cameras, lights)",
+      "Never allow family members or guests to use your corporate-issued laptop or credentials",
+      "Lock your screen every time you step away from your workstation, even at home"
+    ],
+    "what_to_do": "If your home network is compromised or your router exhibits DNS redirection, immediately switch your work device to cellular tethering, disconnect from the home Wi-Fi, and contact IT support."
+  },
+  {
+    "id": "MOD-013",
+    "title": "Cloud Account & SaaS Security",
+    "category": "ACCOUNT SECURITY",
+    "description": "Safeguard cloud identity, detect unauthorized OAuth third-party app consents, and enforce Least Privilege access.",
+    "what_is_it": "Cloud and SaaS security focuses on governing access, API integrations, session tokens, and configurations across platforms like Microsoft 365, Google Workspace, AWS, GitHub, and Salesforce.",
+    "why_it_matters": "Adversaries trick users into granting OAuth app permissions (Illicit Consent Grants) that provide persistent API access to email and files even after passwords are changed, bypassing MFA.",
+    "warning_signs": [
+      "Third-party web applications asking for full read/write access to your mailbox or cloud drive",
+      "New inbox forwarding rules created that forward emails to external personal addresses",
+      "Cloud audit logs showing logins from unfamiliar countries or unusual ASN numbers"
+    ],
+    "safe_practices": [
+      "Review and audit third-party connected apps in your Google/Microsoft account settings regularly",
+      "Never approve OAuth permissions for apps that you did not explicitly seek out and vet",
+      "Periodically inspect mailbox forwarding and redirection rules for unauthorized additions",
+      "Adopt role-based access control (RBAC) and adhere strictly to the Principle of Least Privilege"
+    ],
+    "what_to_do": "Revoke third-party OAuth app authorizations immediately if unfamiliar. Check mailbox rules for stealth forwarding, reset your account credentials, and notify the cloud security administrator."
+  },
+  {
+    "id": "MOD-014",
+    "title": "Incident Reporting & Culture of Transparency",
+    "category": "SOCIAL ENGINEERING",
+    "description": "Understand how swift, blameless incident reporting empowers SOC analysts to contain threats before widespread compromise.",
+    "what_is_it": "Incident reporting is the established protocol through which staff members notify security teams about observed anomalies, mistaken clicks, lost assets, or suspicious communications.",
+    "why_it_matters": "Mean Time to Detect (MTTD) and Mean Time to Contain (MTTC) determine the blast radius of an attack. Prompt reporting transforms every employee into a proactive human sensor in the defense chain.",
+    "warning_signs": [
+      "Hesitating to report a mistaken click out of fear of disciplinary retribution or embarrassment",
+      "Attempting to cover up an accidental data exposure or deleted system files",
+      "Waiting hours or days before informing security after entering credentials on a suspect website"
+    ],
+    "safe_practices": [
+      "Report mistakes immediately; security teams prioritize containment and defense, not punishment",
+      "Keep the official SOC hotline, emergency email, and Slack channel pinned for rapid access",
+      "Preserve evidence by taking screenshots and saving original email headers without modifying files",
+      "Never forward live suspicious attachments to colleagues or personal accounts"
+    ],
+    "what_to_do": "Follow the 'See Something, Say Something' principle: contact the SOC immediately via official channels, provide factual details (what happened, what was clicked, when it occurred), and follow analyst instructions."
+  },
+  {
+    "id": "MOD-015",
+    "title": "AI-Enabled Scams & Synthetic Media Defense",
+    "category": "SOCIAL ENGINEERING",
+    "description": "Counter generative AI impersonations, synthetic voice cloning (vishing), deepfake video meetings, and automated spear phishing.",
+    "what_is_it": "AI-enabled scams utilize generative artificial intelligence models to craft highly tailored spear phishing messages, clone executive or family voices from short audio samples, or generate deepfake video conference attendees.",
+    "why_it_matters": "Generative AI removes linguistic flaws traditionally used to spot phishing, enabling hyper-realistic, localized, and multi-channel impersonations at unprecedented scale.",
+    "warning_signs": [
+      "An urgent phone call from an executive or family member sounding slightly robotic or rushed, asking for confidential wire transfers",
+      "Video call attendees with strange visual artifacts around facial contours, unnatural blinking, or audio desynchronization",
+      "Emails with flawless grammar referencing specific internal projects obtained from scraped social media"
+    ],
+    "safe_practices": [
+      "Establish a pre-shared family or corporate verbal 'Safe Word / Challenge Phrase' for urgent financial requests",
+      "Hang up and call back the person using an independently verified phone number from internal directories",
+      "Verify requests involving sensitive corporate assets through multiple independent senior approvals",
+      "Limit high-resolution public voice and video recordings on public social media where feasible"
+    ],
+    "what_to_do": "If you receive an AI-generated voice or video impersonation attempt, do not comply with any instructions. Document the caller ID, timestamp, and context, and escalate to both corporate security and legal counsel."
+  }
+]

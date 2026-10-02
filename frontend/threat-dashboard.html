@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOC Threat Intelligence Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for high-fidelity interactive SOC charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-text">
+                <h1>CyberSec Intelligence &amp; Awareness</h1>
+            </div>
+            <span class="brand-badge">Defensive Only</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link">Home &amp; Executive</a></li>
+            <li><a href="/threat-dashboard" class="nav-link active">SOC Dashboard</a></li>
+            <li><a href="/threat-details?id=THR-2026-0001" class="nav-link">Investigation View</a></li>
+            <li><a href="/awareness" class="nav-link">Awareness Center</a></li>
+            <li><a href="/quiz" class="nav-link">Security Quiz</a></li>
+        </ul>
+        <div class="nav-status-pill">
+            <span class="status-dot"></span>
+            <span>Live SOC Mode</span>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+            <div>
+                <h2>Security Operations Center (SOC) Dashboard</h2>
+                <p>Real-time defensive threat intelligence, indicator correlation, and ATT&amp;CK behavior analysis.</p>
+            </div>
+            <button id="btn-open-create" class="btn btn-primary btn-sm">
+                + Ingest Defensive Threat
+            </button>
+        </div>
+
+        <!-- 7 Top KPI Summary Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Total Threats</div>
+                <div id="kpi-total-threats" class="kpi-value">-</div>
+                <div class="kpi-subtext">Indexed in repository</div>
+            </div>
+            <div class="kpi-card" style="border-left:3px solid var(--sev-critical);">
+                <div class="kpi-label">Critical Threats</div>
+                <div id="kpi-critical-threats" class="kpi-value" style="color:var(--sev-critical);">-</div>
+                <div class="kpi-subtext">Immediate triage required</div>
+            </div>
+            <div class="kpi-card" style="border-left:3px solid var(--sev-high);">
+                <div class="kpi-label">High Severity</div>
+                <div id="kpi-high-threats" class="kpi-value" style="color:var(--sev-high);">-</div>
+                <div class="kpi-subtext">Active monitoring posture</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Active Indicators</div>
+                <div id="kpi-active-iocs" class="kpi-value" style="color:var(--cyan-accent);">-</div>
+                <div class="kpi-subtext">IP, Domain, URL, Hash, CVE</div>
+            </div>
+            <div class="kpi-card" style="border-left:3px solid var(--sev-medium);">
+                <div class="kpi-label">Open Investigations</div>
+                <div id="kpi-open-investigations" class="kpi-value" style="color:var(--sev-medium);">-</div>
+                <div class="kpi-subtext">Active alert pipeline</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Average Confidence</div>
+                <div id="kpi-avg-confidence" class="kpi-value" style="color:var(--sev-success);">-</div>
+                <div class="kpi-subtext">Intelligence fidelity</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Vulns Tracked</div>
+                <div id="kpi-vulns-tracked" class="kpi-value" style="color:var(--blue-accent);">-</div>
+                <div class="kpi-subtext">Contextually prioritized</div>
+            </div>
+        </div>
+
+        <!-- IOC Quick Search & Validation Tool -->
+        <div class="search-banner">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                    <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-main);">🔍 Defensive IOC Search &amp; Syntax Validator</h3>
+                    <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.2rem;">
+                        Perform passive, safe local database lookups for IP addresses, domains, URLs, file hashes, or CVE IDs.
+                    </p>
+                </div>
+                <span class="badge badge-info" style="font-family:var(--font-mono);">ZERO OUTBOUND NETWORK SOCKETS</span>
+            </div>
+            <div class="search-box-wrap">
+                <input type="text" id="ioc-search-input" class="search-input" placeholder="e.g. 198.51.100.25, login-check.invalid, CVE-2026-1045, or SHA-256 hash...">
+                <button id="btn-search-ioc" class="btn btn-cyan">Validate &amp; Lookup</button>
+            </div>
+        </div>
+
+        <!-- 10 SOC Interactive Charts Grid -->
+        <h3 style="font-size:1.1rem;color:var(--text-main);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">
+            📈 Threat Intelligence Analytics &amp; Visualizations
+        </h3>
+
+        <!-- Charts Row 1: Threats Over Time & Severity Distribution -->
+        <div class="charts-grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">1. Threats Over Time (Trend Telemetry)</span>
+                    <span class="badge badge-info">30-Day Window</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-timeline"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">2. Threats by Severity Breakdown</span>
+                    <span class="badge badge-info">Critical to Informational</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-severity"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row 2: Category, IOC Type, MITRE ATT&CK -->
+        <div class="charts-grid-3">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">3. Threats by Category</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-category"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">4. IOC Type Distribution</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-iocs"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">5. Top MITRE ATT&amp;CK Tactics</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-attack"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row 3: Risk Distribution, Confidence, Vulns Severity -->
+        <div class="charts-grid-3">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">6. Risk Score Distribution</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-risk"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">7. Intelligence Confidence Distribution</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-confidence"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">8. Vulnerabilities by Severity</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-vulns"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row 4: Top Threat Categories & Threat Status Distribution -->
+        <div class="charts-grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">9. Top 5 Threat Categories</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-top-categories"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">10. Threat Status Distribution</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-status"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Correlated Threat Clusters Table -->
+        <div class="card" style="margin-bottom:2rem;">
+            <div class="card-header">
+                <div>
+                    <span class="card-title">🔗 Correlated Threat Clusters &amp; Campaign Infrastructure</span>
+                    <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">
+                        Grouped by campaign identifiers and shared indicator observation windows. Demonstrates non-attributed correlation.
+                    </p>
+                </div>
+                <span class="badge badge-low">Correlation Engine</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Campaign ID</th>
+                            <th>Cluster Description</th>
+                            <th>Category</th>
+                            <th>Avg Risk</th>
+                            <th>Threat Count</th>
+                            <th>Last Observed</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clusters-tbody">
+                        <tr><td colspan="6" style="text-align:center;">Loading correlated clusters...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Threat Intelligence Feed Table -->
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <span class="card-title">📋 Defensive Threat Intelligence Feed</span>
+                    <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">
+                        Filterable, paginated registry of indexed defensive threat intelligence records.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Filters Bar -->
+            <div class="filter-bar">
+                <div>
+                    <label style="font-size:0.75rem;color:var(--text-dim);display:block;margin-bottom:0.2rem;">SEVERITY</label>
+                    <select id="filter-severity" class="filter-select">
+                        <option value="ALL">All Severities</option>
+                        <option value="CRITICAL">Critical</option>
+                        <option value="HIGH">High</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="LOW">Low</option>
+                        <option value="INFORMATIONAL">Informational</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size:0.75rem;color:var(--text-dim);display:block;margin-bottom:0.2rem;">CATEGORY</label>
+                    <select id="filter-category" class="filter-select">
+                        <option value="ALL">All Categories</option>
+                        <option value="PHISHING">Phishing</option>
+                        <option value="MALWARE">Malware</option>
+                        <option value="RANSOMWARE">Ransomware</option>
+                        <option value="CREDENTIAL THREATS">Credential Threats</option>
+                        <option value="NETWORK THREATS">Network Threats</option>
+                        <option value="WEB THREATS">Web Threats</option>
+                        <option value="VULNERABILITY EXPOSURE">Vulnerability Exposure</option>
+                        <option value="SOCIAL ENGINEERING">Social Engineering</option>
+                        <option value="DATA EXPOSURE">Data Exposure</option>
+                        <option value="ACCOUNT SECURITY">Account Security</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size:0.75rem;color:var(--text-dim);display:block;margin-bottom:0.2rem;">INDICATOR TYPE</label>
+                    <select id="filter-type" class="filter-select">
+                        <option value="ALL">All Types</option>
+                        <option value="IP ADDRESS">IP Address</option>
+                        <option value="DOMAIN">Domain</option>
+                        <option value="URL">URL</option>
+                        <option value="FILE HASH">File Hash</option>
+                        <option value="EMAIL/SENDER DOMAIN">Email Sender</option>
+                        <option value="CVE ID">CVE ID</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size:0.75rem;color:var(--text-dim);display:block;margin-bottom:0.2rem;">STATUS</label>
+                    <select id="filter-status" class="filter-select">
+                        <option value="ALL">All Statuses</option>
+                        <option value="NEW">New</option>
+                        <option value="UNDER_REVIEW">Under Review</option>
+                        <option value="MONITORING">Monitoring</option>
+                        <option value="CLOSED">Closed</option>
+                        <option value="FALSE_POSITIVE">False Positive</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size:0.75rem;color:var(--text-dim);display:block;margin-bottom:0.2rem;">SORT BY</label>
+                    <select id="filter-sort" class="filter-select">
+                        <option value="newest">Newest First</option>
+                        <option value="highest_risk">Highest Risk</option>
+                        <option value="highest_confidence">Highest Confidence</option>
+                        <option value="most_observed">Most Observed</option>
+                    </select>
+                </div>
+                <div style="flex:1;min-width:200px;">
+                    <label style="font-size:0.75rem;color:var(--text-dim);display:block;margin-bottom:0.2rem;">SEARCH</label>
+                    <input type="text" id="table-search-input" class="filter-select" style="width:100%;" placeholder="Search ID, name, or indicator value...">
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Threat ID</th>
+                            <th>Threat Name</th>
+                            <th>Category</th>
+                            <th>Indicator Value</th>
+                            <th>Severity</th>
+                            <th>Risk Score</th>
+                            <th>Confidence</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="threats-tbody">
+                        <tr><td colspan="9" style="text-align:center;">Loading threat intelligence records...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <div id="page-info">Page 1 of 1</div>
+                <div class="page-controls">
+                    <button id="btn-prev-page" class="btn btn-sm">Previous</button>
+                    <button id="btn-next-page" class="btn btn-sm">Next</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Search Result Modal -->
+    <div id="search-result-modal" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color:var(--text-main);font-size:1.1rem;">Defensive Indicator Enrichment Report</h3>
+                <button class="close-btn" onclick="closeModal('search-result-modal')">&times;</button>
+            </div>
+            <div id="search-result-body">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Threat Modal -->
+    <div id="create-threat-modal" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color:var(--text-main);font-size:1.1rem;">Ingest Defensive Threat Record</h3>
+                <button class="close-btn" onclick="closeModal('create-threat-modal')">&times;</button>
+            </div>
+            <form id="form-create-threat">
+                <div style="margin-bottom:1rem;">
+                    <label style="font-size:0.8rem;color:var(--text-dim);display:block;margin-bottom:0.3rem;">THREAT NAME *</label>
+                    <input type="text" name="threat_name" class="search-input" style="width:100%;" required placeholder="e.g. Synthetic Credential Harvesting Campaign">
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+                    <div>
+                        <label style="font-size:0.8rem;color:var(--text-dim);display:block;margin-bottom:0.3rem;">CATEGORY *</label>
+                        <select name="category" class="filter-select" style="width:100%;">
+                            <option value="PHISHING">PHISHING</option>
+                            <option value="MALWARE">MALWARE</option>
+                            <option value="RANSOMWARE">RANSOMWARE</option>
+                            <option value="CREDENTIAL THREATS">CREDENTIAL THREATS</option>
+                            <option value="NETWORK THREATS">NETWORK THREATS</option>
+                            <option value="WEB THREATS">WEB THREATS</option>
+                            <option value="VULNERABILITY EXPOSURE">VULNERABILITY EXPOSURE</option>
+                            <option value="SOCIAL ENGINEERING">SOCIAL ENGINEERING</option>
+                            <option value="DATA EXPOSURE">DATA EXPOSURE</option>
+                            <option value="ACCOUNT SECURITY">ACCOUNT SECURITY</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem;color:var(--text-dim);display:block;margin-bottom:0.3rem;">SEVERITY *</label>
+                        <select name="severity" class="filter-select" style="width:100%;">
+                            <option value="MEDIUM">MEDIUM</option>
+                            <option value="HIGH">HIGH</option>
+                            <option value="CRITICAL">CRITICAL</option>
+                            <option value="LOW">LOW</option>
+                            <option value="INFORMATIONAL">INFORMATIONAL</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <label style="font-size:0.8rem;color:var(--text-dim);display:block;margin-bottom:0.3rem;">INDICATOR VALUE * (IP, Domain, URL, Hash, or CVE)</label>
+                    <input type="text" name="indicator_value" class="search-input" style="width:100%;" required placeholder="e.g. 198.51.100.40 or test-auth.invalid">
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+                    <div>
+                        <label style="font-size:0.8rem;color:var(--text-dim);display:block;margin-bottom:0.3rem;">SOURCE NAME</label>
+                        <input type="text" name="source_name" class="search-input" style="width:100%;" value="Internal SOC">
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem;color:var(--text-dim);display:block;margin-bottom:0.3rem;">SOURCE RELIABILITY</label>
+                        <select name="source_reliability" class="filter-select" style="width:100%;">
+                            <option value="A – Highly Reliable">A – Highly Reliable</option>
+                            <option value="B – Usually Reliable">B – Usually Reliable</option>
+                            <option value="C – Fairly Reliable">C – Fairly Reliable</option>
+                            <option value="D – Reliability Unknown">D – Reliability Unknown</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <label style="font-size:0.8rem;color:var(--text-dim);display:block;margin-bottom:0.3rem;">CONFIDENCE SCORE (0-100)</label>
+                    <input type="number" name="confidence_score" class="search-input" style="width:100%;" min="0" max="100" value="85">
+                </div>
+                <div style="margin-bottom:1.5rem;">
+                    <label style="font-size:0.8rem;color:var(--text-dim);display:block;margin-bottom:0.3rem;">DESCRIPTION / CONTEXT</label>
+                    <textarea name="description" class="search-input" style="width:100%;height:80px;" placeholder="Observed defensive telemetry and investigation notes..."></textarea>
+                </div>
+                <div style="display:flex;justify-content:flex-end;gap:0.75rem;">
+                    <button type="button" class="btn" onclick="closeModal('create-threat-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Validate &amp; Ingest</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-disclaimer">
+            <strong>Defensive Cybersecurity Notice:</strong> Synthetic defensive telemetry dataset for education and SOC training. No live exploits, malware payloads, or automated attack scans are performed.
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

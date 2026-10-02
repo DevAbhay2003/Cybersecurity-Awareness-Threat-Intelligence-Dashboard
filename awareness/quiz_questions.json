@@ -1,0 +1,418 @@
+[
+  {
+    "id": "Q-01",
+    "category": "Phishing",
+    "question": "You receive an unexpected email from 'IT Support' stating your account will be suspended in 3 hours unless you click a link and re-verify your password. What should you do?",
+    "options": [
+      "Click the link immediately to prevent losing account access",
+      "Reply to the email asking for confirmation of the request",
+      "Verify the request through an official, trusted IT channel or report button",
+      "Forward the email to colleagues to ask if they received it too"
+    ],
+    "correct_index": 2,
+    "explanation": "Urgency is a classic social engineering tactic. Legitimate IT departments rarely demand immediate password verification via external links. Always verify through official channels or report via the phishing button."
+  },
+  {
+    "id": "Q-02",
+    "category": "Phishing",
+    "question": "When inspecting an email claiming to be from your bank, which element is the most reliable indicator of potential phishing?",
+    "options": [
+      "The official brand logo embedded in the email body",
+      "The actual header domain in the 'From' and 'Reply-To' addresses",
+      "A professional-looking confidentiality footer",
+      "The presence of a copyright year at the bottom"
+    ],
+    "correct_index": 1,
+    "explanation": "Logos, footers, and copyright text are easily copied by attackers. The actual sending domain and cryptographic signatures (SPF/DKIM) provide true identity signals."
+  },
+  {
+    "id": "Q-03",
+    "category": "Phishing",
+    "question": "What is 'Quishing' in modern threat intelligence terminology?",
+    "options": [
+      "Phishing conducted via VoIP telephone calls",
+      "Phishing delivered via malicious or obfuscated QR codes",
+      "Automated mass SMS credential harvesting",
+      "Physical theft of hardware security tokens"
+    ],
+    "correct_index": 1,
+    "explanation": "Quishing (QR code phishing) uses QR codes to bypass traditional email gateway URL scanners and redirect victims to mobile credential harvesting portals."
+  },
+  {
+    "id": "Q-04",
+    "category": "Passwords",
+    "question": "Which of the following is considered the strongest password strategy according to modern NIST guidelines?",
+    "options": [
+      "An 8-character password changed every 30 days with numbers and symbols",
+      "A long, memorable 16+ character passphrase managed in a dedicated password manager",
+      "A predictable pattern like 'CompanyYear!' with slight monthly variations",
+      "Writing a complex password in a private notebook next to your desk"
+    ],
+    "correct_index": 1,
+    "explanation": "NIST SP 800-63B emphasizes passphrase length, uniqueness, and password managers over frequent arbitrary rotations that encourage predictable patterns."
+  },
+  {
+    "id": "Q-05",
+    "category": "Passwords",
+    "question": "Why is password reuse across multiple services considered a severe cybersecurity vulnerability?",
+    "options": [
+      "Because password managers cannot handle duplicate entries",
+      "Because an attacker compromising one low-security website can use credential stuffing to access critical accounts",
+      "Because browsers automatically block websites if passwords are repeated",
+      "Because repeated passwords reduce computational encryption speed"
+    ],
+    "correct_index": 1,
+    "explanation": "In Credential Stuffing attacks, adversaries ingest breached credential dumps from third parties and test the same email/password pairs against hundreds of major enterprise portals."
+  },
+  {
+    "id": "Q-06",
+    "category": "Passwords",
+    "question": "What is the primary defensive benefit of using an enterprise Password Manager?",
+    "options": [
+      "It automatically decrypts encrypted files on the local filesystem",
+      "It generates unique, high-entropy passwords for every service and autofills only on genuine matching domains",
+      "It replaces the need for network firewalls and endpoint antivirus",
+      "It sends your passwords to the SOC for automated manual review"
+    ],
+    "correct_index": 1,
+    "explanation": "Password managers generate unique credentials and defend against phishing because they refuse to autofill credentials on counterfeit lookalike domains."
+  },
+  {
+    "id": "Q-07",
+    "category": "MFA",
+    "question": "You receive multiple consecutive MFA push notifications on your phone while you are asleep. What attack is likely occurring?",
+    "options": [
+      "Ransomware encryption burst",
+      "MFA Fatigue (Push Bombing) attack following credential compromise",
+      "DNS Cache Poisoning",
+      "Distributed Denial of Service (DDoS) against your phone"
+    ],
+    "correct_index": 1,
+    "explanation": "MFA Fatigue occurs when an attacker who already stole your password spams approval prompts hoping you will accidentally or exhaustively click 'Approve'."
+  },
+  {
+    "id": "Q-08",
+    "category": "MFA",
+    "question": "Which Multi-Factor Authentication method provides the highest resistance against adversary-in-the-middle (AiTM) phishing proxies?",
+    "options": [
+      "SMS text verification codes",
+      "Voice phone call verification",
+      "FIDO2 / WebAuthn hardware security keys or Passkeys",
+      "Email-based one-time numeric OTP codes"
+    ],
+    "correct_index": 2,
+    "explanation": "FIDO2 / WebAuthn binds cryptographic authentication challenges to the browser's origin domain, making it impossible for reverse-proxy phishing kits to intercept or replay credentials."
+  },
+  {
+    "id": "Q-09",
+    "category": "MFA",
+    "question": "A person calling themselves 'Senior Systems Admin' asks you to read aloud the 6-digit MFA code just texted to your phone. What should you do?",
+    "options": [
+      "Provide the code since they are IT staff",
+      "Never share the code; hang up and report the incident immediately",
+      "Ask them to send an email first, then read the code over the phone",
+      "Read only the first 3 digits for verification"
+    ],
+    "correct_index": 1,
+    "explanation": "Legitimate IT and security administrators will never ask for your one-time passwords or MFA tokens. This is a classic social engineering vishing attempt."
+  },
+  {
+    "id": "Q-10",
+    "category": "Social Engineering",
+    "question": "What is 'Pretexting' in social engineering?",
+    "options": [
+      "Sending malware through automated SMS text blasts",
+      "Creating an invented scenario or persona to manipulate a target into divulging confidential information",
+      "Encrypting files before sending a ransom demand",
+      "Scanning open ports across an external IP subnet"
+    ],
+    "correct_index": 1,
+    "explanation": "Pretexting involves creating a believable fabricated story, background, or identity (such as an auditor, vendor, or law enforcement) to extract sensitive information."
+  },
+  {
+    "id": "Q-11",
+    "category": "Social Engineering",
+    "question": "An unknown individual wearing a delivery uniform closely follows you through a badge-restricted building entrance without scanning their badge. This is an example of:",
+    "options": [
+      "Man-in-the-Middle attack",
+      "Tailgating / Piggybacking",
+      "Credential Stuffing",
+      "Drive-by Download"
+    ],
+    "correct_index": 1,
+    "explanation": "Tailgating or piggybacking is a physical social engineering tactic where unauthorized individuals bypass physical access control barriers by trailing authorized personnel."
+  },
+  {
+    "id": "Q-12",
+    "category": "Social Engineering",
+    "question": "You receive an email apparently from your CEO marked 'URGENT & CONFIDENTIAL' asking you to purchase $1,000 in gift cards for an employee award. What is this?",
+    "options": [
+      "Business Email Compromise (BEC) / CEO Fraud",
+      "Ransomware precursor beacon",
+      "Legitimate emergency operational directive",
+      "Automated CVE exploitation"
+    ],
+    "correct_index": 0,
+    "explanation": "Business Email Compromise (BEC) uses executive impersonation and high urgency to bypass normal financial approval controls."
+  },
+  {
+    "id": "Q-13",
+    "category": "Safe Browsing",
+    "question": "What does a green padlock or 'HTTPS' in a browser address bar guarantee?",
+    "options": [
+      "The website is 100% benign, safe, and trustworthy",
+      "The connection between your browser and the web server is encrypted",
+      "The files hosted on the server have been scanned for viruses",
+      "The website is an authorized government or enterprise portal"
+    ],
+    "correct_index": 1,
+    "explanation": "HTTPS ensures encryption in transit, preventing eavesdropping. Threat actors can easily obtain valid SSL/TLS certificates for malicious phishing domains."
+  },
+  {
+    "id": "Q-14",
+    "category": "Safe Browsing",
+    "question": "You search for open-source utility software and land on a site named 'g1mp-download-free.invalid'. Clicking download prompts a file named 'setup.exe'. What is the safest course of action?",
+    "options": [
+      "Run the installer as Administrator so it installs quickly",
+      "Abort the download, delete any downloaded artifact, and seek the official verified project repository",
+      "Rename the file extension to .txt to inspect it",
+      "Forward the file to colleagues to test on their machines"
+    ],
+    "correct_index": 1,
+    "explanation": "Adversaries use SEO poisoning and malvertising to distribute trojanized installers. Always obtain software from official, verified source repositories."
+  },
+  {
+    "id": "Q-15",
+    "category": "Safe Browsing",
+    "question": "What is 'Typosquatting'?",
+    "options": [
+      "A keyboard virus that alters typing speed",
+      "Registering domain names that look or sound like legitimate brands to catch mistyped URLs",
+      "An automated bot that fixes typos in corporate emails",
+      "A technique used to brute-force Wi-Fi encryption keys"
+    ],
+    "correct_index": 1,
+    "explanation": "Typosquatting targets users who make typographical errors when entering URLs into address bars (e.g., netflx.com instead of netflix.com)."
+  },
+  {
+    "id": "Q-16",
+    "category": "Ransomware",
+    "question": "What is 'Double Extortion' in modern ransomware campaigns?",
+    "options": [
+      "Demanding payment in two different cryptocurrency wallets",
+      "Encrypting files AND exfiltrating sensitive data to threaten public release if ransom is not paid",
+      "Attacking both the company and the cybersecurity vendor",
+      "Running two different encryption algorithms consecutively on files"
+    ],
+    "correct_index": 1,
+    "explanation": "In double extortion, threat actors exfiltrate confidential data prior to encryption, neutralizing the defensive effectiveness of having good offline backups alone."
+  },
+  {
+    "id": "Q-17",
+    "category": "Ransomware",
+    "question": "If an endpoint workstation suddenly displays a ransom note and files start changing extensions, what is the immediate first defensive action?",
+    "options": [
+      "Pay the ransom using personal funds immediately",
+      "Physically disconnect the device from network (unplug Ethernet / turn off Wi-Fi) and notify the SOC",
+      "Format the hard drive immediately using an external utility",
+      "Restart the computer repeatedly to clear the memory"
+    ],
+    "correct_index": 1,
+    "explanation": "Isolating the host from the network prevents lateral movement across the subnet. Do not power down, as volatile memory contains vital cryptographic keys and forensic evidence."
+  },
+  {
+    "id": "Q-18",
+    "category": "Ransomware",
+    "question": "Which defensive practice provides the strongest recovery resilience against ransomware file destruction?",
+    "options": [
+      "Storing backups on a mapped network drive connected 24/7",
+      "Immutable, offline, or air-gapped backups following the 3-2-1 backup principle",
+      "Relying entirely on commercial desktop antivirus software",
+      "Disabling all operating system updates"
+    ],
+    "correct_index": 1,
+    "explanation": "Ransomware specifically targets and deletes connected backups. Immutable or offline backups cannot be modified or encrypted by an adversary on the local network."
+  },
+  {
+    "id": "Q-19",
+    "category": "Privacy",
+    "question": "An employee uploads proprietary customer contracts and unreleased source code to a public generative AI chat tool. What risk is introduced?",
+    "options": [
+      "Hardware destruction of the employee's computer",
+      "Confidential data exposure, regulatory non-compliance, and potential intellectual property leakage",
+      "Immediate network port exhaustion",
+      "Immediate corruption of the enterprise database"
+    ],
+    "correct_index": 1,
+    "explanation": "Public AI tools may ingest prompts into training corpora or log prompts on third-party servers, causing unauthorized data exposure under GDPR, HIPAA, and IP laws."
+  },
+  {
+    "id": "Q-20",
+    "category": "Privacy",
+    "question": "What is the defensive principle of 'Data Minimization'?",
+    "options": [
+      "Compressing all enterprise files to save hard drive capacity",
+      "Collecting and retaining only the personal data strictly necessary for legitimate operational purposes",
+      "Deleting log files every 24 hours to reduce storage costs",
+      "Limiting database queries to 10 records per minute"
+    ],
+    "correct_index": 1,
+    "explanation": "Data minimization reduces the blast radius of any potential future security breach by ensuring unnecessary sensitive records are neither collected nor stored."
+  },
+  {
+    "id": "Q-21",
+    "category": "Privacy",
+    "question": "Under data privacy frameworks, what constitutes Personally Identifiable Information (PII)?",
+    "options": [
+      "Only public corporate stock symbols",
+      "Information that can be used alone or combined with other data to identify an individual",
+      "Publicly accessible web server source code only",
+      "Network routing protocols and gateway addresses"
+    ],
+    "correct_index": 1,
+    "explanation": "PII includes names, social security numbers, email addresses, phone numbers, biometric records, and other identifiable attributes."
+  },
+  {
+    "id": "Q-22",
+    "category": "Wi-Fi",
+    "question": "Why is working on sensitive corporate assets over open airport or coffee shop Wi-Fi without a VPN risky?",
+    "options": [
+      "Airport Wi-Fi speeds are too slow for enterprise applications",
+      "Adversaries can deploy rogue access points (Evil Twins) or inspect unencrypted traffic on the local broadcast domain",
+      "Open Wi-Fi automatically deletes browser cache files",
+      "Airport Wi-Fi requires frequent hardware restarts"
+    ],
+    "correct_index": 1,
+    "explanation": "Open Wi-Fi networks lack client isolation and encryption, enabling nearby attackers to spoof networks, perform DNS redirection, and monitor unencrypted telemetry."
+  },
+  {
+    "id": "Q-23",
+    "category": "Wi-Fi",
+    "question": "What is an 'Evil Twin' access point attack?",
+    "options": [
+      "Two identical routers configured in high-availability mode",
+      "A rogue Wi-Fi access point spoofing the SSID and MAC of a legitimate wireless network",
+      "A virus that duplicates wireless network cards",
+      "An automated script that changes Wi-Fi passwords every minute"
+    ],
+    "correct_index": 1,
+    "explanation": "An Evil Twin mimics a legitimate hotspot (e.g. 'Airport_Free_WiFi') to trick devices into connecting, intercepting credentials and session tokens."
+  },
+  {
+    "id": "Q-24",
+    "category": "Wi-Fi",
+    "question": "Which Wi-Fi security protocol offers the most robust modern encryption for wireless communications?",
+    "options": [
+      "WEP (Wired Equivalent Privacy)",
+      "WPA (Wi-Fi Protected Access)",
+      "WPA3 with Simultaneous Authentication of Equals (SAE)",
+      "Open Unencrypted Guest Network"
+    ],
+    "correct_index": 2,
+    "explanation": "WPA3 provides advanced 192-bit cryptographic strength and SAE handshake protection against offline dictionary and brute force attacks."
+  },
+  {
+    "id": "Q-25",
+    "category": "Mobile Security",
+    "question": "What risk does 'Jailbreaking' or 'Rooting' a mobile device introduce to an organization?",
+    "options": [
+      "It improves battery longevity beyond manufacturer ratings",
+      "It strips away built-in operating system sandboxing, granting malicious applications root-level access",
+      "It causes cellular networks to permanently reject the SIM card",
+      "It doubles mobile data plan charges"
+    ],
+    "correct_index": 1,
+    "explanation": "OS sandboxing prevents mobile apps from accessing other apps' private data or keystrokes. Rooting strips these protections, leaving corporate data vulnerable to spyware."
+  },
+  {
+    "id": "Q-26",
+    "category": "Mobile Security",
+    "question": "A mobile application requests permissions for Camera, Microphone, SMS, and Full Contacts for a simple calculator utility. What should you do?",
+    "options": [
+      "Grant all permissions because modern operating systems auto-restrict abuse",
+      "Deny excessive permissions and uninstall the application immediately",
+      "Turn off the screen while calculating to prevent microphone activation",
+      "Allow permissions only during night hours"
+    ],
+    "correct_index": 1,
+    "explanation": "Excessive permissions are a major indicator of potential spyware or adware. Utilities should never require access to private communication or biometric sensors."
+  },
+  {
+    "id": "Q-27",
+    "category": "Mobile Security",
+    "question": "What is the most effective immediate defense if an enterprise mobile device is lost or stolen?",
+    "options": [
+      "Wait 7 business days to see if someone returns it to lost-and-found",
+      "Notify IT/Security immediately to trigger an encrypted remote device wipe",
+      "Post a reward notice on public social media forums",
+      "Cancel the mobile phone number immediately without contacting IT"
+    ],
+    "correct_index": 1,
+    "explanation": "Prompt reporting allows Mobile Device Management (MDM) administrators to send a cryptographic remote wipe command before attackers bypass device screen locks."
+  },
+  {
+    "id": "Q-28",
+    "category": "Incident Reporting",
+    "question": "You realize you accidentally entered your corporate credentials on a suspect webpage 5 minutes ago. What is the best action?",
+    "options": [
+      "Keep quiet and hope the security team does not notice",
+      "Immediately change your password and report the event to the SOC / Security Helpdesk",
+      "Turn off your computer and leave for the day",
+      "Delete your browser history and temporary files to hide the activity"
+    ],
+    "correct_index": 1,
+    "explanation": "Immediate reporting allows SOC analysts to revoke session tokens, monitor for unauthorized logins, and prevent threat actors from establishing persistence."
+  },
+  {
+    "id": "Q-29",
+    "category": "Incident Reporting",
+    "question": "Why is a 'Blameless Security Culture' essential for strong enterprise defense?",
+    "options": [
+      "Because cybersecurity rules do not matter in enterprise settings",
+      "Because employees who fear disciplinary action will conceal mistakes, delaying incident containment",
+      "Because security analysts do not like conducting investigations",
+      "Because software bugs are always the fault of the vendor"
+    ],
+    "correct_index": 1,
+    "explanation": "When organizations foster a blameless culture, staff report suspicious anomalies or mistakes rapidly without fear, significantly reducing Mean Time to Detect (MTTD)."
+  },
+  {
+    "id": "Q-30",
+    "category": "Incident Reporting",
+    "question": "When reporting a suspicious phishing email to the SOC, what information is most valuable for analysts?",
+    "options": [
+      "Only a verbal description over the telephone",
+      "The full original email with headers, or using the email client's reporting plugin",
+      "A forwarded copy with the sender address deleted",
+      "A photograph of your computer monitor taken with a phone"
+    ],
+    "correct_index": 1,
+    "explanation": "Full email headers contain the true sender IP, mail server routing hops, SPF/DKIM verification results, and technical indicators needed for SOC defense."
+  },
+  {
+    "id": "Q-31",
+    "category": "Safe Browsing",
+    "question": "What is the primary danger of downloading pirated software, cracked games, or license key generators on work computers?",
+    "options": [
+      "The software interface may be rendered in a different language",
+      "Cracked software frequently embeds InfoStealers, Backdoors, and Ransomware loaders",
+      "It requires excessive disk space",
+      "It resets your default operating system wallpaper"
+    ],
+    "correct_index": 1,
+    "explanation": "Keygens and pirated media are prime distribution vectors for InfoStealers (like RedLine, Lumma, and Vidar) designed to siphon browser passwords and crypto wallets."
+  },
+  {
+    "id": "Q-32",
+    "category": "MFA",
+    "question": "What is 'SIM Swapping' and how does it threaten authentication?",
+    "options": [
+      "Replacing a physical SIM card with a micro-SIM",
+      "An attacker tricks a mobile carrier into reassigning your phone number to their SIM, intercepting SMS MFA codes",
+      "A hardware malfunction inside 5G cell towers",
+      "A Wi-Fi router feature that prioritizes voice over data"
+    ],
+    "correct_index": 1,
+    "explanation": "SIM swapping targets telecom carriers to hijack victim phone numbers, enabling attackers to reset passwords and intercept SMS-based MFA one-time codes."
+  }
+]

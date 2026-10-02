@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Awareness Center | Human Defense</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-text">
+                <h1>CyberSec Intelligence &amp; Awareness</h1>
+            </div>
+            <span class="brand-badge">Defensive Only</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link">Home &amp; Executive</a></li>
+            <li><a href="/threat-dashboard" class="nav-link">SOC Dashboard</a></li>
+            <li><a href="/threat-details?id=THR-2026-0001" class="nav-link">Investigation View</a></li>
+            <li><a href="/awareness" class="nav-link active">Awareness Center</a></li>
+            <li><a href="/quiz" class="nav-link">Security Quiz</a></li>
+        </ul>
+        <div class="nav-status-pill">
+            <span class="status-dot"></span>
+            <span>Human Defense Center</span>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+            <div>
+                <h2>Cybersecurity Awareness Learning Center</h2>
+                <p>Interactive educational curriculum empowering people to recognize, prevent, and report cyber threats.</p>
+            </div>
+            <a href="/quiz" class="btn btn-cyan">
+                📝 Test Your Knowledge (Quiz)
+            </a>
+        </div>
+
+        <!-- Phishing Anatomy Infographic Featurette -->
+        <section class="card" style="margin-bottom:2rem;background:linear-gradient(135deg, rgba(22, 32, 50, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);">
+            <div class="card-header">
+                <div>
+                    <span class="card-title" style="color:var(--cyan-accent);font-size:1.1rem;">🎣 Anatomy of a Credential Phishing Attack</span>
+                    <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.2rem;">
+                        Inspect the 6 most common tell-tale indicators found in deceptive emails and messages.
+                    </p>
+                </div>
+                <span class="badge badge-critical">Phishing Defense</span>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:1rem;margin-top:0.75rem;">
+                <div style="background:var(--bg-input);padding:1rem;border-radius:8px;border:1px solid var(--border-color);">
+                    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+                        <span style="font-size:1.2rem;">⚠️</span>
+                        <strong style="font-size:0.9rem;color:var(--sev-high);">1. Mismatched Sender Domain</strong>
+                    </div>
+                    <p style="font-size:0.8rem;color:var(--text-muted);">
+                        The display name claims to be "Corporate IT Helpdesk", but the actual SMTP address is <code>support@cloud-verify.invalid</code>.
+                    </p>
+                </div>
+
+                <div style="background:var(--bg-input);padding:1rem;border-radius:8px;border:1px solid var(--border-color);">
+                    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+                        <span style="font-size:1.2rem;">⏰</span>
+                        <strong style="font-size:0.9rem;color:var(--sev-critical);">2. Artificial High Urgency</strong>
+                    </div>
+                    <p style="font-size:0.8rem;color:var(--text-muted);">
+                        "Account suspended in 24 hours!" Urgency exploits panic to bypass rational judgment and security validation.
+                    </p>
+                </div>
+
+                <div style="background:var(--bg-input);padding:1rem;border-radius:8px;border:1px solid var(--border-color);">
+                    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+                        <span style="font-size:1.2rem;">🔗</span>
+                        <strong style="font-size:0.9rem;color:var(--cyan-accent);">3. Deceptive Hyperlink</strong>
+                    </div>
+                    <p style="font-size:0.8rem;color:var(--text-muted);">
+                        Hyperlink text reads "https://portal.company.com" but the actual destination points to <code>https://login-check.invalid/auth</code>.
+                    </p>
+                </div>
+
+                <div style="background:var(--bg-input);padding:1rem;border-radius:8px;border:1px solid var(--border-color);">
+                    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+                        <span style="font-size:1.2rem;">📱</span>
+                        <strong style="font-size:0.9rem;color:var(--sev-medium);">4. QR Code Quishing</strong>
+                    </div>
+                    <p style="font-size:0.8rem;color:var(--text-muted);">
+                        Attacker embeds a QR code prompting the victim to scan with a personal phone, bypassing corporate email link filters.
+                    </p>
+                </div>
+
+                <div style="background:var(--bg-input);padding:1rem;border-radius:8px;border:1px solid var(--border-color);">
+                    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+                        <span style="font-size:1.2rem;">📎</span>
+                        <strong style="font-size:0.9rem;color:var(--blue-accent);">5. Unexpected Attachments</strong>
+                    </div>
+                    <p style="font-size:0.8rem;color:var(--text-muted);">
+                        Invoices or payroll spreadsheets delivered as macro-enabled .docm, password-protected .zip, or .iso archive containers.
+                    </p>
+                </div>
+
+                <div style="background:var(--bg-input);padding:1rem;border-radius:8px;border:1px solid var(--border-color);">
+                    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+                        <span style="font-size:1.2rem;">📣</span>
+                        <strong style="font-size:0.9rem;color:var(--sev-success);">6. Out-of-Band Verification</strong>
+                    </div>
+                    <p style="font-size:0.8rem;color:var(--text-muted);">
+                        Defensive remedy: Always verify unexpected urgent requests via known, independent internal phone numbers or chat.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Filters & Search Toolbar -->
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                <button class="btn btn-sm cat-tab active" data-category="ALL">All 15 Modules</button>
+                <button class="btn btn-sm cat-tab" data-category="PHISHING">Phishing</button>
+                <button class="btn btn-sm cat-tab" data-category="CREDENTIAL">Passwords &amp; MFA</button>
+                <button class="btn btn-sm cat-tab" data-category="SOCIAL">Social Engineering</button>
+                <button class="btn btn-sm cat-tab" data-category="WEB">Web &amp; Safe Browsing</button>
+                <button class="btn btn-sm cat-tab" data-category="NETWORK">Network &amp; Wi-Fi</button>
+                <button class="btn btn-sm cat-tab" data-category="RANSOMWARE">Ransomware</button>
+                <button class="btn btn-sm cat-tab" data-category="DATA">Data Privacy</button>
+            </div>
+            <div style="min-width:260px;">
+                <input type="text" id="module-search-input" class="search-input" style="padding:0.5rem 0.75rem;font-size:0.85rem;" placeholder="Search awareness modules...">
+            </div>
+        </div>
+
+        <!-- 15 Dynamic Modules Grid -->
+        <div class="module-grid" id="modules-grid">
+            <!-- Dynamically populated via awareness.js -->
+        </div>
+    </main>
+
+    <!-- Detailed Module Modal -->
+    <div id="module-modal" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <span id="modal-module-cat" class="badge badge-info" style="margin-bottom:0.25rem;">-</span>
+                    <h3 id="modal-module-title" style="color:var(--text-main);font-size:1.25rem;">-</h3>
+                </div>
+                <button id="btn-close-module-modal" class="close-btn">&times;</button>
+            </div>
+            <div id="modal-module-body">
+                <!-- Dynamically populated via awareness.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-disclaimer">
+            <strong>Defensive Cybersecurity Notice:</strong> Educational curriculum for cybersecurity awareness and risk reduction. Content adheres to NIST SP 800-50 guidelines for information security awareness and training.
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/awareness.js"></script>
+</body>
+</html>

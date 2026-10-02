@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Awareness & Threat Intelligence Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-text">
+                <h1>CyberSec Intelligence & Awareness</h1>
+            </div>
+            <span class="brand-badge">Defensive Only</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link active">Home & Executive</a></li>
+            <li><a href="/threat-dashboard" class="nav-link">SOC Dashboard</a></li>
+            <li><a href="/threat-details?id=THR-2026-0001" class="nav-link">Investigation View</a></li>
+            <li><a href="/awareness" class="nav-link">Awareness Center</a></li>
+            <li><a href="/quiz" class="nav-link">Security Quiz</a></li>
+        </ul>
+        <div class="nav-status-pill">
+            <span class="status-dot"></span>
+            <span>Passive Telemetry Engine</span>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section style="background:linear-gradient(135deg, rgba(22, 32, 50, 0.9) 0%, rgba(13, 21, 34, 0.95) 100%);border:1px solid var(--border-color);border-radius:12px;padding:3rem 2.5rem;margin-bottom:2rem;position:relative;overflow:hidden;">
+            <div style="max-width:850px;">
+                <span class="badge badge-low" style="margin-bottom:0.75rem;padding:0.3rem 0.6rem;">Industry-Grade Defensive Cybersecurity Platform</span>
+                <h1 style="font-size:2.4rem;font-weight:800;letter-spacing:-0.03em;color:#fff;line-height:1.2;margin-bottom:1rem;">
+                    Cybersecurity Awareness &amp; Threat Intelligence Dashboard
+                </h1>
+                <p style="font-size:1.1rem;color:var(--text-muted);line-height:1.6;margin-bottom:1.75rem;">
+                    A unified defensive security operations platform bridging <strong>Technical Threat Intelligence</strong> (IOC validation, ATT&amp;CK mapping, risk scoring, alert correlation) with <strong>Human Defense</strong> (cybersecurity awareness curriculum, quizzes, and personalized training).
+                </p>
+                <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                    <a href="/threat-dashboard" class="btn btn-primary" style="padding:0.85rem 1.5rem;font-size:0.95rem;">
+                        📊 Open SOC Threat Dashboard
+                    </a>
+                    <a href="/awareness" class="btn btn-cyan" style="padding:0.85rem 1.5rem;font-size:0.95rem;">
+                        🎓 Cybersecurity Awareness Center
+                    </a>
+                    <a href="/quiz" class="btn" style="padding:0.85rem 1.5rem;font-size:0.95rem;">
+                        📝 Take 30+ Question Quiz
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Executive Cybersecurity Summary View -->
+        <section style="margin-bottom:2.5rem;">
+            <div class="section-header">
+                <div>
+                    <h2>Executive Cybersecurity Summary</h2>
+                    <p>High-level threat landscape and workforce risk exposure briefing for leadership.</p>
+                </div>
+                <div id="exec-timestamp" style="font-size:0.8rem;color:var(--text-dim);font-family:var(--font-mono);"></div>
+            </div>
+
+            <div class="card" style="margin-bottom:1.5rem;background:linear-gradient(180deg, var(--bg-card) 0%, rgba(22, 32, 50, 0.6) 100%);">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:1rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border-color);margin-bottom:1.5rem;">
+                    <div>
+                        <div class="kpi-label">Monitored Threats</div>
+                        <div id="exec-threats-count" class="kpi-value" style="font-size:2rem;color:var(--cyan-accent);">-</div>
+                        <div class="kpi-subtext">Active defensive dataset</div>
+                    </div>
+                    <div>
+                        <div class="kpi-label">Elevated (Critical + High)</div>
+                        <div id="exec-elevated-count" class="kpi-value" style="font-size:2rem;color:var(--sev-critical);">-</div>
+                        <div class="kpi-subtext">Requires analyst triage</div>
+                    </div>
+                    <div>
+                        <div class="kpi-label">Open Investigations</div>
+                        <div id="exec-investigations-count" class="kpi-value" style="font-size:2rem;color:var(--sev-high);">-</div>
+                        <div class="kpi-subtext">In SOC triage pipeline</div>
+                    </div>
+                    <div>
+                        <div class="kpi-label">Intel Confidence Avg</div>
+                        <div id="exec-confidence-avg" class="kpi-value" style="font-size:2rem;color:var(--sev-success);">-</div>
+                        <div class="kpi-subtext">Admiralty &amp; evidence score</div>
+                    </div>
+                    <div>
+                        <div class="kpi-label">Workforce Awareness</div>
+                        <div id="exec-awareness-index" class="kpi-value" style="font-size:2rem;color:var(--blue-accent);">-</div>
+                        <div class="kpi-subtext">Educational benchmark</div>
+                    </div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+                    <div>
+                        <h3 style="font-size:0.95rem;color:var(--cyan-accent);margin-bottom:0.75rem;text-transform:uppercase;letter-spacing:0.05em;">Strategic Insights</h3>
+                        <ul id="exec-strategic-list" style="padding-left:1.25rem;font-size:0.875rem;color:var(--text-muted);line-height:1.7;">
+                            <li>Loading strategic takeaways...</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="font-size:0.95rem;color:var(--sev-high);margin-bottom:0.75rem;text-transform:uppercase;letter-spacing:0.05em;">Defensive Priorities</h3>
+                        <ul id="exec-priorities-list" style="padding-left:1.25rem;font-size:0.875rem;color:var(--text-muted);line-height:1.7;">
+                            <li>Loading defensive priorities...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Crucial Defensive Distinction: Observation vs Indicator vs Alert vs Threat vs Incident -->
+        <section style="margin-bottom:2.5rem;">
+            <div class="section-header">
+                <div>
+                    <h2>Crucial Defensive Distinctions</h2>
+                    <p>Understanding the operational boundary between raw data, intelligence indicators, and confirmed incidents.</p>
+                </div>
+            </div>
+
+            <div class="table-responsive card" style="padding:0;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width:18%;">Concept</th>
+                            <th style="width:38%;">Defensive Definition</th>
+                            <th style="width:24%;">Example</th>
+                            <th style="width:20%;">SOC Analyst Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong style="color:var(--cyan-accent);">OBSERVATION</strong></td>
+                            <td>A raw, uncontextualized event or telemetry log captured by security sensors, proxy logs, or firewall tables.</td>
+                            <td><code class="code-cell">Outbound connection on port 443</code></td>
+                            <td>Ingested into SIEM; no immediate alert triggered without rule threshold match.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:var(--blue-accent);">INDICATOR (IOC)</strong></td>
+                            <td>A specific technical artifact (IP, Domain, URL, Hash) suggesting potential malicious activity with associated intelligence metadata.</td>
+                            <td><code class="code-cell">login-check.invalid</code></td>
+                            <td>Syntactically validated and matched against threat databases for enrichment.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:var(--sev-medium);">ALERT</strong></td>
+                            <td>A prioritized notification generated by a detection rule or correlation engine when telemetry exceeds risk thresholds.</td>
+                            <td><code class="code-cell">Phishing Risk Elevation (Score 78)</code></td>
+                            <td>Triaged in SOC queue; deduplicated to prevent analyst alert fatigue.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:var(--sev-high);">THREAT</strong></td>
+                            <td>A potential circumstance or actor capability that could exploit vulnerabilities to inflict harm on enterprise assets.</td>
+                            <td><code class="code-cell">Credential Theft Campaign via Spearphishing</code></td>
+                            <td>Mapped to MITRE ATT&amp;CK TTPs; defensive countermeasures prepared.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:var(--sev-critical);">INCIDENT</strong></td>
+                            <td>A confirmed security event that actually compromises confidentiality, integrity, or availability of enterprise systems.</td>
+                            <td><code class="code-cell">Compromised Admin Account &amp; Data Exfiltration</code></td>
+                            <td>Full Incident Response Plan (IRP) initiated: Contain, Eradicate, Recover.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Platform Pillars: Technical CTI + Human Defense -->
+        <section style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem;">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">🔬 Pillar 1: Technical Threat Intelligence</span>
+                    <span class="badge badge-low">SOC Workflows</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:0.875rem;margin-bottom:1rem;line-height:1.6;">
+                    Empowers security analysts with automated syntactic validation, local offline enrichment, multi-factor risk and confidence scoring, alert deduplication, and ATT&amp;CK behavior mapping.
+                </p>
+                <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.85rem;color:var(--text-dim);">
+                    <div>✓ Multi-factor Risk Scoring (0–100) across 6 weighted dimensions</div>
+                    <div>✓ MITRE ATT&amp;CK Enterprise Matrix mapping where justified</div>
+                    <div>✓ Contextual Vulnerability Prioritization (CVSS + Criticality + Exposure)</div>
+                    <div>✓ Zero active outbound connections (Safe Defensive Design)</div>
+                </div>
+                <div style="margin-top:1.25rem;">
+                    <a href="/threat-dashboard" class="btn btn-sm btn-primary">Go to Threat Dashboard &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">👥 Pillar 2: Human Defense &amp; Awareness</span>
+                    <span class="badge badge-success">Awareness Center</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:0.875rem;margin-bottom:1rem;line-height:1.6;">
+                    Transforms every employee into a proactive defensive sensor through structured training across 15 critical threat categories, realistic safe scenarios, and diagnostic quizzes.
+                </p>
+                <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.85rem;color:var(--text-dim);">
+                    <div>✓ 15 Comprehensive Educational Learning Modules</div>
+                    <div>✓ 30+ Question Comprehensive Knowledge Evaluation</div>
+                    <div>✓ Automated Weak-Area Identification &amp; Targeted Module Assignment</div>
+                    <div>✓ Culture of Transparency &amp; Blameless Incident Reporting</div>
+                </div>
+                <div style="margin-top:1.25rem;">
+                    <a href="/awareness" class="btn btn-sm btn-cyan">Go to Awareness Center &rarr;</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-disclaimer">
+            <strong>Defensive Cybersecurity Notice:</strong> This project is designed exclusively for educational cybersecurity training, defensive threat-intelligence analysis, and security awareness. It operates entirely with synthetic, sanitized telemetry and does not interact with, probe, or execute malicious payloads or external unauthorized systems.
+        </div>
+        <div style="margin-top:0.75rem;color:var(--text-dim);font-size:0.75rem;">
+            Cybersecurity Awareness &amp; Threat Intelligence Dashboard • Industry Proof of Work • 2026
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                const res = await apiFetch("/api/dashboard/executive");
+                const ex = res.data;
+                document.getElementById("exec-timestamp").textContent = ex.timestamp;
+                document.getElementById("exec-threats-count").textContent = ex.key_metrics.threats_monitored.toLocaleString();
+                document.getElementById("exec-elevated-count").textContent = ex.key_metrics.critical_or_high_threats.toLocaleString();
+                document.getElementById("exec-investigations-count").textContent = ex.key_metrics.active_investigations.toLocaleString();
+                document.getElementById("exec-confidence-avg").textContent = ex.key_metrics.threat_intel_confidence_average;
+                document.getElementById("exec-awareness-index").textContent = ex.key_metrics.workforce_awareness_index;
+
+                document.getElementById("exec-strategic-list").innerHTML = ex.strategic_takeaways.map(s => `<li>${s}</li>`).join("");
+                document.getElementById("exec-priorities-list").innerHTML = ex.defensive_priorities.map(p => `<li>${p}</li>`).join("");
+            } catch (err) {
+                console.error("Failed to load executive summary:", err);
+            }
+        });
+    </script>
+</body>
+</html>

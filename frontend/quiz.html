@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Awareness Evaluation &amp; Quiz</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-text">
+                <h1>CyberSec Intelligence &amp; Awareness</h1>
+            </div>
+            <span class="brand-badge">Defensive Only</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link">Home &amp; Executive</a></li>
+            <li><a href="/threat-dashboard" class="nav-link">SOC Dashboard</a></li>
+            <li><a href="/threat-details?id=THR-2026-0001" class="nav-link">Investigation View</a></li>
+            <li><a href="/awareness" class="nav-link">Awareness Center</a></li>
+            <li><a href="/quiz" class="nav-link active">Security Quiz</a></li>
+        </ul>
+        <div class="nav-status-pill">
+            <span class="status-dot"></span>
+            <span>Diagnostic Evaluation</span>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Quiz Form View -->
+        <div id="quiz-form-container" class="quiz-container">
+            <div class="section-header">
+                <div>
+                    <h2>Cybersecurity Awareness Evaluation</h2>
+                    <p>32 scenario-based questions covering Phishing, Passwords, MFA, Ransomware, Social Engineering, and Wi-Fi security.</p>
+                </div>
+                <div id="quiz-progress-text" style="font-size:0.85rem;color:var(--cyan-accent);font-weight:600;">
+                    0 of 32 Questions Answered
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div style="background:var(--bg-card);border:1px solid var(--border-color);height:8px;border-radius:4px;overflow:hidden;margin-bottom:2rem;">
+                <div id="quiz-progress-bar" style="background:linear-gradient(90deg, var(--cyan-accent), var(--blue-accent));width:0%;height:100%;transition:width 0.3s ease;"></div>
+            </div>
+
+            <!-- Dynamic Question Cards -->
+            <div id="questions-list">
+                <div style="text-align:center;padding:3rem;color:var(--text-muted);">
+                    Loading evaluation questions...
+                </div>
+            </div>
+
+            <!-- Submission Footer -->
+            <div style="text-align:center;margin-top:2rem;margin-bottom:3rem;">
+                <button id="btn-submit-quiz" class="btn btn-primary" style="padding:0.85rem 2.5rem;font-size:1.05rem;">
+                    Submit Evaluation &amp; Compute Awareness Score
+                </button>
+            </div>
+        </div>
+
+        <!-- Quiz Results & Scoring View (Hidden by default) -->
+        <div id="quiz-results-container" class="quiz-container" style="display:none;">
+            <!-- Overall Score Dial Card -->
+            <div class="score-circle-wrap">
+                <div style="text-align:center;min-width:140px;">
+                    <div id="res-overall-score" class="score-number">0%</div>
+                    <div id="res-grade-label" class="badge badge-success" style="font-size:0.85rem;padding:0.35rem 0.75rem;">Strong Awareness</div>
+                </div>
+                <div>
+                    <h3 style="font-size:1.5rem;font-weight:800;color:var(--text-main);margin-bottom:0.4rem;">Evaluation Summary</h3>
+                    <p id="res-correct-count" style="font-size:0.95rem;color:var(--text-muted);margin-bottom:0.75rem;">-</p>
+                    <p style="font-size:0.8rem;color:var(--text-dim);line-height:1.5;">
+                        <strong>Educational Assessment Disclaimer:</strong> This score represents an educational measurement of cybersecurity threat awareness and defensive best practices. It is not an employee performance evaluation or competency judgment.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Category Proficiency Radar Chart -->
+            <div class="card" style="margin-bottom:2rem;">
+                <div class="card-header">
+                    <span class="card-title">📊 Category Proficiency Radar</span>
+                    <span class="badge badge-info">10 Domain Areas</span>
+                </div>
+                <div style="position:relative;height:350px;width:100%;">
+                    <canvas id="chart-quiz-categories"></canvas>
+                </div>
+            </div>
+
+            <!-- Personalized Learning Recommendations -->
+            <div class="card" style="margin-bottom:2rem;">
+                <div class="card-header">
+                    <span class="card-title">🎯 Targeted Educational Recommendations</span>
+                    <span class="badge badge-low">Automated Adaptive Learning</span>
+                </div>
+                <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">
+                    Based on your evaluation responses, the recommendation engine has tailored specific micro-learning modules to strengthen your defensive posture:
+                </p>
+                <div id="recommendations-list">
+                    <!-- Injected via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Detailed Question-by-Question Review -->
+            <div class="section-header">
+                <div>
+                    <h2>Question-by-Question Analyst Review</h2>
+                    <p>Examine correct solutions and defensive explanations for every scenario.</p>
+                </div>
+                <button id="btn-retake-quiz" class="btn btn-sm btn-cyan">
+                    🔄 Retake Evaluation
+                </button>
+            </div>
+
+            <div id="questions-review-list">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-disclaimer">
+            <strong>Defensive Cybersecurity Notice:</strong> Synthetic educational assessment tool for cybersecurity defense training.
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/quiz.js"></script>
+</body>
+</html>

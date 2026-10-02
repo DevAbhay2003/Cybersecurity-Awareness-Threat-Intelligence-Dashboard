@@ -1,0 +1,8 @@
+# Cybersecurity Awareness & Threat Intelligence Dashboard
+# Defensive Security Platform Dependencies
+
+Flask>=3.0.0
+flask-cors>=4.0.0
+pandas>=2.0.0
+pytest>=8.0.0
+python-dotenv>=1.0.0

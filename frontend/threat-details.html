@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threat Investigation View | SOC Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-text">
+                <h1>CyberSec Intelligence &amp; Awareness</h1>
+            </div>
+            <span class="brand-badge">Defensive Only</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link">Home &amp; Executive</a></li>
+            <li><a href="/threat-dashboard" class="nav-link">SOC Dashboard</a></li>
+            <li><a href="/threat-details" class="nav-link active">Investigation View</a></li>
+            <li><a href="/awareness" class="nav-link">Awareness Center</a></li>
+            <li><a href="/quiz" class="nav-link">Security Quiz</a></li>
+        </ul>
+        <div class="nav-status-pill">
+            <span class="status-dot"></span>
+            <span>Analyst Investigation Mode</span>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container" id="threat-details-container">
+        <!-- Back Navigation -->
+        <div style="margin-bottom:1rem;">
+            <a href="/threat-dashboard" style="color:var(--cyan-accent);text-decoration:none;font-size:0.85rem;display:inline-flex;align-items:center;gap:0.4rem;">
+                &larr; Return to SOC Dashboard
+            </a>
+        </div>
+
+        <!-- Threat Header Card -->
+        <div class="card" style="margin-bottom:1.5rem;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;">
+                <div>
+                    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.4rem;">
+                        <span id="threat-id-heading" class="code-cell" style="font-size:1.1rem;font-weight:700;">THR-2026-0001</span>
+                        <span id="badge-category" class="badge badge-info">-</span>
+                        <span id="badge-severity">-</span>
+                        <span id="badge-status">-</span>
+                        <span id="badge-tlp">-</span>
+                    </div>
+                    <h2 id="threat-name-heading" style="font-size:1.6rem;font-weight:800;letter-spacing:-0.02em;color:var(--text-main);margin-bottom:0.5rem;">
+                        Loading threat metadata...
+                    </h2>
+                    <p id="threat-desc" style="color:var(--text-muted);font-size:0.9rem;max-width:900px;line-height:1.6;">
+                        -
+                    </p>
+                </div>
+
+                <!-- Quick Action Status Bar -->
+                <div style="background:var(--bg-input);padding:0.75rem 1rem;border-radius:8px;border:1px solid var(--border-color);">
+                    <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:0.4rem;text-transform:uppercase;">Operational Posture</div>
+                    <div style="display:flex;gap:0.4rem;">
+                        <button class="btn btn-sm btn-status-action" data-status="INVESTIGATING">Investigate</button>
+                        <button class="btn btn-sm btn-status-action" data-status="MONITORING">Monitor</button>
+                        <button class="btn btn-sm btn-status-action" data-status="CLOSED">Resolve/Close</button>
+                        <button class="btn btn-sm btn-status-action" data-status="FALSE_POSITIVE">Mark FP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 KPI Metrics Strip -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:1rem;margin-bottom:1.5rem;">
+            <div class="card" style="border-left:3px solid var(--sev-critical);">
+                <div class="kpi-label">Risk Score</div>
+                <div id="detail-risk-score" class="kpi-value" style="color:var(--sev-critical);">-</div>
+                <div class="kpi-subtext">Multi-factor defensive score</div>
+            </div>
+            <div class="card" style="border-left:3px solid var(--cyan-accent);">
+                <div class="kpi-label">Confidence Score</div>
+                <div id="detail-confidence" class="kpi-value" style="color:var(--cyan-accent);">-</div>
+                <div class="kpi-subtext">Evidence fidelity index</div>
+            </div>
+            <div class="card" style="border-left:3px solid var(--sev-high);">
+                <div class="kpi-label">Recorded Sightings</div>
+                <div id="detail-sightings" class="kpi-value" style="color:var(--sev-high);">-</div>
+                <div class="kpi-subtext">Aggregated telemetry count</div>
+            </div>
+            <div class="card" style="border-left:3px solid var(--blue-accent);">
+                <div class="kpi-label">Source Reliability</div>
+                <div id="detail-source" class="kpi-value" style="font-size:1.15rem;color:var(--text-main);margin-top:0.6rem;">-</div>
+                <div class="kpi-subtext">Admiralty intelligence rating</div>
+            </div>
+        </div>
+
+        <!-- 2 Column Deep Investigation Grid -->
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;">
+            <!-- Left Column: Indicators, ATT&CK, Recommended Actions, Timeline -->
+            <div>
+                <!-- Primary & Associated Indicators -->
+                <div class="card" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <span class="card-title">🎯 Technical Indicators (IOCs)</span>
+                        <span class="badge badge-info">Zero Active Outbound Sockets</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Indicator Value</th>
+                                    <th>First Seen</th>
+                                    <th>Last Seen</th>
+                                </tr>
+                            </thead>
+                            <tbody id="indicators-tbody">
+                                <tr><td colspan="4" style="text-align:center;">Loading indicators...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- MITRE ATT&CK Mapping -->
+                <div class="card" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <span class="card-title">⚔️ MITRE ATT&amp;CK Adversary TTP Mapping</span>
+                        <span class="badge badge-low">Enterprise Matrix</span>
+                    </div>
+                    <div id="attack-mapping-wrap">
+                        Loading ATT&amp;CK behavior mapping...
+                    </div>
+                </div>
+
+                <!-- Recommended Defensive Actions Checklist -->
+                <div class="card" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <span class="card-title">🛡️ Recommended Defensive Actions (Triage Checklist)</span>
+                        <span class="badge badge-success">Playbook</span>
+                    </div>
+                    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;">
+                        Standard defensive containment and mitigation procedures for Tier 1 / Tier 2 SOC responders:
+                    </p>
+                    <div style="display:flex;flex-direction:column;gap:0.6rem;font-size:0.85rem;color:var(--text-main);">
+                        <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;">
+                            <input type="checkbox" style="accent-color:var(--cyan-accent);">
+                            <span>Review internal proxy and email gateway logs for related incoming sender domains or URLs</span>
+                        </label>
+                        <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;">
+                            <input type="checkbox" style="accent-color:var(--cyan-accent);">
+                            <span>Verify whether any internal users submitted credentials; revoke sessions and force password reset</span>
+                        </label>
+                        <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;">
+                            <input type="checkbox" style="accent-color:var(--cyan-accent);">
+                            <span>Add indicator to defensive proxy/firewall blocklists in passive monitoring mode</span>
+                        </label>
+                        <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;">
+                            <input type="checkbox" style="accent-color:var(--cyan-accent);">
+                            <span>Deploy targeted phishing awareness micro-learning module to affected departments</span>
+                        </label>
+                        <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;">
+                            <input type="checkbox" style="accent-color:var(--cyan-accent);">
+                            <span>Cross-reference correlated IP infrastructure (198.51.100.25) in NetFlow telemetry</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Threat Investigation Timeline -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">⏱️ Threat Lifecycle &amp; Telemetry Timeline</span>
+                    </div>
+                    <div class="timeline" id="timeline-container">
+                        <!-- Injected via JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Campaign Context & Analyst Notes -->
+            <div>
+                <!-- Campaign & Observation Details -->
+                <div class="card" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <span class="card-title">📌 Campaign Metadata</span>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.85rem;">
+                        <div>
+                            <span style="color:var(--text-dim);display:block;font-size:0.75rem;">CAMPAIGN CLUSTER</span>
+                            <span id="detail-campaign" class="code-cell" style="font-size:0.9rem;">-</span>
+                        </div>
+                        <div>
+                            <span style="color:var(--text-dim);display:block;font-size:0.75rem;">FIRST OBSERVED</span>
+                            <span id="detail-first-seen" style="color:var(--text-main);">-</span>
+                        </div>
+                        <div>
+                            <span style="color:var(--text-dim);display:block;font-size:0.75rem;">LATEST SIGHTING</span>
+                            <span id="detail-last-seen" style="color:var(--text-main);">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analyst Triage Notes Feed -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">📝 Analyst Triage Notes</span>
+                    </div>
+
+                    <div id="notes-container" style="max-height:300px;overflow-y:auto;margin-bottom:1rem;">
+                        <!-- Injected via JavaScript -->
+                    </div>
+
+                    <!-- Add Note Form -->
+                    <form id="form-add-note" style="border-top:1px solid var(--border-color);padding-top:1rem;">
+                        <div style="margin-bottom:0.75rem;">
+                            <label style="font-size:0.75rem;color:var(--text-dim);display:block;margin-bottom:0.2rem;">AUTHOR</label>
+                            <input type="text" name="author" class="filter-select" style="width:100%;" value="SOC Analyst Tier 1" required>
+                        </div>
+                        <div style="margin-bottom:0.75rem;">
+                            <label style="font-size:0.75rem;color:var(--text-dim);display:block;margin-bottom:0.2rem;">INVESTIGATION NOTE</label>
+                            <textarea name="note" class="search-input" style="width:100%;height:70px;" required placeholder="Log findings, correlation context, or containment steps..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-cyan" style="width:100%;">
+                            Submit Analyst Note
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-disclaimer">
+            <strong>Defensive Cybersecurity Notice:</strong> Synthetic defensive telemetry dataset for education and SOC training. Indicators must be analyzed as data rather than actively connected to.
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/details.js"></script>
+</body>
+</html>
